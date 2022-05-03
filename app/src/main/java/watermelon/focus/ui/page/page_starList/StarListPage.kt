@@ -44,31 +44,31 @@ fun StarListPage(
             .background(Color(0xFFF8F8F8))
     ) {
         //存储最开始的starList,在AnimatedVisibility处作判断是否播放删除动画
-        var lastTodoList = remember { viewPageStates.starList.value }
+        var lastStarList = remember { viewPageStates.starList.value }
         //当refreshStarList=0时，lastTodoList中为默认空List，在首次访问数据库后，才获取到真正的全部stars
-        if (refreshStarList.value == 1) lastTodoList = viewPageStates.starList.value
+        if (refreshStarList.value == 1) lastStarList = viewPageStates.starList.value
         //侧滑星球栏
         LazyRow(modifier = Modifier
             .fillMaxHeight(0.35f)
             .fillMaxWidth(), content = {
-            for (todo in lastTodoList) {
+            for (star in lastStarList) {
                 //已有星球列表
                 item {
                     AnimatedVisibility(
-                        visible = viewPageStates.starList.value.contains(todo),
+                        visible = viewPageStates.starList.value.contains(star),
                         exit = fadeOut(
                             targetAlpha = 0f,
                             animationSpec = tween(durationMillis = 600)
                         )
                     ) {
                         Box(modifier = Modifier.wrapContentSize()) {//将删除按钮和StarItem重叠
-                            DeleteButton(color = Color(todo.color), onClick = {
+                            DeleteButton(color = Color(star.color), onClick = {
                                 viewModel.dispatch(
-                                    StarListPageViewModel.StarListPageAction.DeleteStar(todo)
+                                    StarListPageViewModel.StarListPageAction.DeleteStar(star)
                                 )
                             })
                             StarItem(
-                                todoStar = todo,
+                                todoStar = star,
                                 clickable = {
                                     viewModel.dispatch(
                                         StarListPageViewModel.StarListPageAction.SelectStar(it)

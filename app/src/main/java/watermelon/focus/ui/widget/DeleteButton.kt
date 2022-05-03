@@ -70,7 +70,7 @@ fun DeleteButton(color: Color, onClick: () -> Unit) {
                         ),
                         start = Offset(0f,0f),end = Offset(400.dp.value,400.dp.value),
                     ),
-                    radius = 300.dp.value,
+                    radius = 400.dp.value,
                     center = Offset(x = size.width / 2, y = size.height / 2)
                 )
             })
