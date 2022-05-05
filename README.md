@@ -13,15 +13,17 @@ UI使用`Compose`实现，采用了MVI架构，涉及框架包括Navigation,Hilt
 1. `创建星球界面`设置星球名字，打卡时间和详细描述
 2. `星球列表界面`选中要打卡的星球
 3. `主界面`设置要打卡的时间，开始打卡
-<div align=center> <img src="https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/51a625381aea455c90e71259c3df2875~tplv-k3u1fbpfcp-watermark.image?"/> </div>
+
+![1651511878919](./picture/1651511878919.gif)
 
 ## 功能
 ### 主界面
 - **左右滑动** 设置倒计时时间
 - **长按星球** 当卫星消失再出现并开始逆时针转动的时候开始计时。打卡的时长会被记录进对应的星球中
-<div align=center> <img src="https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/c4160270ba364b50b6153d2a34fa2b2d~tplv-k3u1fbpfcp-watermark.image?"/> </div>
 
 
+
+![1651511878919](./picture/1651511878919.gif)
 
 
 ### 星球列表界面
@@ -30,7 +32,8 @@ UI使用`Compose`实现，采用了MVI架构，涉及框架包括Navigation,Hilt
 - **左右滑动** 查看已有星球
 - **上滑界面** 查看星球详细信息
 - **点击✨**   选中当前星球为要打卡的星球
-<div align=center> <img src="https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/094d5f94931a4551aa9371471cd5600b~tplv-k3u1fbpfcp-watermark.image?"/> </div>
+
+![1651562374424](./picture/1651562374424.gif)
 
 
 ### 新建星球界面
@@ -38,14 +41,15 @@ UI使用`Compose`实现，采用了MVI架构，涉及框架包括Navigation,Hilt
 - **颜色选择** 选中新星球的颜色，这些颜色按钮也做了渐变的动画
 - **时间选择** 没啥好说的
 - **点击✨**   创建星球
-<div align=center> <img src="https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/92af8dd73d8546f0a19fab34ac4b6b2e~tplv-k3u1fbpfcp-watermark.image?"/> </div>
+
+![1651562434323](./picture/1651562434323.gif)
 
 
 ## 主要实现
 ### 架构
 - MVI
 >MVI相比MVVM更加强调`数据的单向流动`和`唯一数据源`，项目中将用户所有的操作包装为Action,传入到界面对应的ViewModel中进行处理，在ViewModel中对界面的状态进行统一集中管理。而UI层则订阅ViewState,当界面状态变化时，Compose函数会自动进行更新
-<div align=center> <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/bb3fe9361e244430bd2f69b70c7b0e75~tplv-k3u1fbpfcp-watermark.awebp"/> </div>
+![84ED106B-EDEA-495F-9652-0BF51BD4CD07](./picture/84ED106B-EDEA-495F-9652-0BF51BD4CD07.png)
 
 ```kotlin
 //将state的setter设置为私有，使状态只能在dispatch()中修改，保证数据只能单向修改
@@ -151,7 +155,7 @@ AnimatedVisibility(visible = sheetState.currentValue == ModalBottomSheetValue.Ex
     ) {...}
 }
 ```
-<div align=center> <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/4e8d4fd63bc241e282782c3459826655~tplv-k3u1fbpfcp-watermark.image?"/> </div>
+![1651573977400](./picture/1651573977400.gif)
 
 再比如`InfiniteTransition`实现的动态渐变Button (删除星球按钮：
 ```kotlin
@@ -199,7 +203,7 @@ fun DeleteButton(color: Color, onClick: () -> Unit) {
     }
 }
 ```
-<div align=center> <img src="https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/404b45a782544d97aed8ff32bcd804e1~tplv-k3u1fbpfcp-watermark.image?"/> </div>
+![1651573171050](./picture/1651573171050.gif)
 
 - 自定义绘制
 这方面感觉和原生的写法大同小异，而自定义布局还没来得及了解，这里就不赘述了
